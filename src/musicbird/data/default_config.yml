@@ -1,0 +1,48 @@
+# Default configration file for musicbird.
+
+# The path to your music library that you want to convert.
+# Musicbird will only read from this directory, it will never modify your existing library.
+#
+# Required
+source: #"~/music"
+
+# The directory under which the converted copy of your library will be stored. Required
+destination: #"~/music_converted"
+
+copy:
+  # Whether to copy regular non-audio files found in your library to the mirror. Default: true
+  files: true
+  # Whether to copy album art image files (such as cover.jpg). This does not affect the album art embedded in audio files.
+  # Default: false
+  album_art: false
+
+# What to do with files that are already lossy (e.g. MP3s, AAC). Valid options are:
+# - copy: Treat the lossy files just like regular files and copy them over
+# - convert: Convert lossy files into the format specified in `encoder`. This might result in a loss in quality!
+# - ignore: Don't do anything with these files and don't copy them over.
+# Default: copy
+lossy_files: copy
+
+# By default, musicbird tracks file deletions in your source library and will remove deleted files from the mirrors.
+# Set this to false to disable this
+prune: true
+
+# Select the encoder to use. You can adjust the encoder settings below.
+encoder: mp3
+mp3:
+  vbr: true # Whether to use VBR encoding instead of CBR. Default: true
+  quality: 0 # Quality at which to encode files. 0 = Highest (~220kbit/s), 9 = Lowest
+  #bitrate: 320k # Only used for CBR encoding. Sets the bitrate in bit/s
+opus:
+  bitrate: 128k # Target bitrate of the output files. Default: 128k
+
+# By default, musicird will automatically use all available threads on your system for encoding.
+# You can set a cusotm value below, if you so choose.
+#threads:
+
+# The type of database musicbird should use for storing information about your library.
+# Default: sqlite3 database in $XDG_DATA_HOME/musicbird
+# Note that sqlite3 is the only supported database type right now.
+#database: sqlite3
+#sqlite3:
+#  path: "~/.local/share/musicbird/db.sqlite3"
