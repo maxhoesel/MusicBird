@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.8", "3.9"]
-
+      fail-fast: false
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -23,6 +23,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        sudo apt update && sudo apt install -y ffmpeg
         python3 -m pip install --upgrade pip
         pip install tox tox-gh-actions
     - name: Test with tox
@@ -44,12 +45,34 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s
 
     - name: Run pylint
-      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run :
-        pylint --msg-template='{path}:{line}:{column}:{msg_id} {msg}' --output-format=parseable ./src/musicbird --zero-exit | ./bin/reviewdog -efm="%f:%l:%c:%m" -reporter=github-pr-check -filter-mode=nofilter -name="gitlint"
+        pylint --msg-template='{path}:{line}:{column}:{msg_id} {msg}' --output-format=parseable ./src/musicbird --exit-zero | ./bin/reviewdog -efm="%f:%l:%c:%m" -reporter=github-pr-check -filter-mode=nofilter -name="gitlint"
 
     - name: Run gitlint
       env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         gitlint 2>&1 | ./bin/reviewdog -efm="%m" -reporter=github-pr-check -filter-mode=nofilter -fail-on-error -name="gitlint"
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+    - name: Install dependencies
+      run: |
+        sudo apt update && sudo apt install -y ffmpeg
+        python3 -m pip install --upgrade pip
+        pip install tox tox-gh-actions
+    - name: Geneerate coverate report
+      run: tox -e py39
+
+    - name: Upload coverage report
+      uses: codecov/codecov-action@v2
+      with:
+        files: ./coverage.xml

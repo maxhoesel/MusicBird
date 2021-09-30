@@ -1,5 +1,16 @@
-MusicBird - A Python package to convert your Music library on-the-fly!
-######################################################################
+MusicBird - Convert your Music library on-the-fly!
+##################################################
+
+.. image:: https://img.shields.io/github/workflow/status/maxhoesel/MusicBird/CI.svg
+   :target: https://img.shields.io/github/workflow/status/maxhoesel/MusicBird/CI.svg
+.. image:: https://img.shields.io/pypi/pyversions/musicbird.svg
+   :target: https://img.shields.io/pypi/pyversions/musicbird.svg
+.. image:: https://img.shields.io/pypi/l/musicbird.svg
+   :target: https://img.shields.io/pypi/l/musicbird.svg
+.. image:: https://img.shields.io/codecov/c/github/maxhoesel/MusicBird.svg
+   :target: https://img.shields.io/codecov/c/github/maxhoesel/MusicBird.svg
+
+----
 
 MusicBird is a python package that creates a mobile-friendly copy of your music library. Its major features include:
 
@@ -16,7 +27,7 @@ MusicBird is a python package that creates a mobile-friendly copy of your music 
 Documentation
 =============
 
-See the `official docs <https://github.com/maxhoesel/>`_ for installation and usage instructions
+See the `official docs <https://musicbird.readthedocs.io/en/latest/>`_ for installation and usage instructions
 
 Author & License
 ================
