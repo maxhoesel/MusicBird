@@ -15,6 +15,11 @@ from .file import File
 
 logger = logging.getLogger(__name__)
 
+# Always ignore these files as system metadata
+IGNORE_FILES = [
+    "Thumbs.db"
+]
+
 
 class LibraryScanner:
     """Index a directory and add its contents to the DB.
@@ -50,9 +55,8 @@ class LibraryScanner:
             file.was_deleted = True
             self.db.add_or_update_file(file)
 
-        # todo: replace glob with glob from pathlib. Haven't found a way to make that work yet
         for path in self.path.glob("./**/*"):
-            if path.is_file():
+            if path.is_file() and path.name not in IGNORE_FILES:
                 file = File(path)
                 try:
                     file.determine_type()
