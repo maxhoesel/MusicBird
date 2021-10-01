@@ -67,6 +67,7 @@ def main(args: List[str]) -> bool:
         successful = prune.prune_command(parser, command_args, _config.config)
     else:
         parser.parse_args()
+        successful = False
 
     if not successful:
         return False
