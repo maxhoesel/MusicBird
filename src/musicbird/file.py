@@ -207,7 +207,7 @@ class File:
                 self.type = FileType.OTHER
                 return
             else:
-                logger.error(
+                logger.warning(
                     f"Failure trying to determine type for file {self.path}, falling back to type 'OTHER': {repr(e)}.")
                 self.type = FileType.OTHER
                 return
