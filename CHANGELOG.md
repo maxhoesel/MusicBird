@@ -1,4 +1,10 @@
 
+<a name="v0.1.5"></a>
+## [v0.1.5] - 2021-10-01
+### Bug Fixes
+- don't raise during failure reporting ([463737c](https://github.com/maxhoesel/MusicBird/commit/463737c)) [Max Hösel]
+
+
 <a name="v0.1.4"></a>
 ## [v0.1.4] - 2021-10-01
 ### Bug Fixes
@@ -28,6 +34,7 @@
 - initial fixes ([1565574](https://github.com/maxhoesel/MusicBird/commit/1565574)) [Max Hösel]
 
 
+[v0.1.5]: https://github.com/maxhoesel/MusicBird/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/maxhoesel/MusicBird/compare/v0.1.3...v0.1.4
 [v0.1.3]: https://github.com/maxhoesel/MusicBird/compare/v0.1.2...v0.1.3
 [v0.1.2]: https://github.com/maxhoesel/MusicBird/compare/v0.1.1...v0.1.2
