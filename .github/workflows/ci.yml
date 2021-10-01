@@ -44,17 +44,17 @@ jobs:
         pip install --editable '.[dev]'
         curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s
 
-    - name: Run pylint
-      env:
-        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run :
-        pylint --msg-template='{path}:{line}:{column}:{msg_id} {msg}' --output-format=parseable ./src/musicbird --exit-zero | ./bin/reviewdog -efm="%f:%l:%c:%m" -reporter=github-pr-check -filter-mode=nofilter -name="gitlint"
-
     - name: Run gitlint
       env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         gitlint 2>&1 | ./bin/reviewdog -efm="%m" -reporter=github-pr-check -filter-mode=nofilter -fail-on-error -name="gitlint"
+
+    - name: Run pylint
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        pylint --msg-template='{path}:{line}:{column}:{msg_id} {msg}' --output-format=parseable ./src/musicbird --exit-zero | ./bin/reviewdog -efm="%f:%l:%c:%m" -reporter=github-pr-check -filter-mode=nofilter -name="gitlint"
 
   coverage:
     runs-on: ubuntu-latest
