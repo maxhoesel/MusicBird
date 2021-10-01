@@ -1,5 +1,5 @@
 MusicBird - Convert your Music library on-the-fly 🐦
-##################################################
+####################################################
 
 .. image:: https://img.shields.io/github/workflow/status/maxhoesel/MusicBird/CI.svg
    :target: https://img.shields.io/github/workflow/status/maxhoesel/MusicBird/CI.svg
