@@ -208,6 +208,7 @@ class File:
                 logger.error(
                     f"Failure trying to determine type for file {self.path}, falling back to type 'OTHER': {repr(e)}.")
                 self.type = FileType.OTHER
+                return
 
         # Generate a set of audio codecs used in the file. Regular audio files usually only have a single stream.
         audio_codecs = list({probe["streams"][i]["codec_name"] for i in range(len(probe["streams"]))
