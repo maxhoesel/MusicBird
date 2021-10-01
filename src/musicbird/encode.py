@@ -76,6 +76,7 @@ def _db_update_worker(db: LibraryDB, input_q: Queue, output: Queue) -> None:
                 return
             db.add_or_update_file(file)
             output.put(file)
+            logger.info(f"Processed file: {file.path}")
         else:
             time.sleep(1)
 
@@ -116,12 +117,8 @@ def encode(config: Dict, db: LibraryDB, pretend=False) -> bool:
         db_thread.start()
 
         with concurrent.futures.ThreadPoolExecutor(config["threads"]) as executor:
-            futures = []
             for file in to_encode:
-                futures.append(executor.submit(_encode_worker, file, config, successful_encodes, failed_encodes))
-            for future in concurrent.futures.as_completed(futures):
-                if future.result():
-                    logger.info(f"Encoded file: {file.path}")
+                executor.submit(_encode_worker, file, config, successful_encodes, failed_encodes)
 
         # Encode jobs have finished, add termination object to DB queue
         successful_encodes.put(None)
