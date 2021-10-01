@@ -54,7 +54,7 @@ jobs:
 
       - name: Create and push Release commit
         run: |
-          git add CHANGELOG.md
+          git add CHANGELOG.md src/musicbird/__init__.py
           git commit -m "Release ${{ github.event.inputs.version }}"
           git push
       - name: Get release commit hash
