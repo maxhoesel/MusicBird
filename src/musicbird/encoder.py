@@ -69,6 +69,7 @@ class FFmpegEncoder(Encoder):
             logger.error(f"Could not create directory to encode file {dest}: {repr(e)}")
             return False
         try:
+            logger.debug(f"Encoding to {str(dest)} with arguments {self.ffmpeg_args}")
             stream = ffmpeg.input(str(src))
             stream = ffmpeg.output(stream, str(dest), **self.ffmpeg_args)
             stream = ffmpeg.overwrite_output(stream)
