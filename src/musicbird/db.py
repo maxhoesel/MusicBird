@@ -218,6 +218,8 @@ class SQLiteLibrary(LibraryDB):
         file = File(**row)
         file.path = Path(row["path"])
         file.type = FileType(row["filetype"])
+        file.needs_processing = bool(row["needs_processing"])
+        file.was_deleted = bool(row["was_deleted"])
         return file
 
 
