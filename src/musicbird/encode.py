@@ -144,7 +144,7 @@ def encode(config: Dict, db: LibraryDB, pretend=False) -> bool:
     logger.info(f"Successfully encoded {len(to_encode) - len(failures)} files")
     if failures:
         logger.error(f"Failed to delete {len(failures)} files. See above for errors")
-        failures_str = "\n".join([f.path for f in failures])
+        failures_str = "\n".join([str(f.path) for f in failures])
         logger.debug(f"Failed files: {failures_str}")
         return False
     else:

@@ -124,6 +124,7 @@ class File:
         """
         if self.was_deleted:
             logger.error(f"File {self.path} was deleted and cannot be copied")
+            self.was_deleted = True
             return False
 
         dest = self.get_dest_path(config)
