@@ -140,3 +140,6 @@ cython_debug/
 
 # Editor settings
 .vscode
+
+# Local Pyenv File
+.python-version
