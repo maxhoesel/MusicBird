@@ -1,4 +1,13 @@
 
+<a name="v0.1.6"></a>
+## [v0.1.6] - 2021-10-01
+### Bug Fixes
+- encoding messages now show the correct file ([92ce723](https://github.com/maxhoesel/MusicBird/commit/92ce723)) [Max Hösel]
+
+### Features
+- **scan:** improve scanning performance by conditionally skipping type determination ([7123c53](https://github.com/maxhoesel/MusicBird/commit/7123c53)) [Max Hösel]
+
+
 <a name="v0.1.5"></a>
 ## [v0.1.5] - 2021-10-01
 ### Bug Fixes
@@ -34,6 +43,7 @@
 - initial fixes ([1565574](https://github.com/maxhoesel/MusicBird/commit/1565574)) [Max Hösel]
 
 
+[v0.1.6]: https://github.com/maxhoesel/MusicBird/compare/v0.1.5...v0.1.6
 [v0.1.5]: https://github.com/maxhoesel/MusicBird/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/maxhoesel/MusicBird/compare/v0.1.3...v0.1.4
 [v0.1.3]: https://github.com/maxhoesel/MusicBird/compare/v0.1.2...v0.1.3
