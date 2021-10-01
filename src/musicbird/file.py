@@ -131,6 +131,7 @@ class File:
         logger.info(f"Copying file: {self.path}")
         try:
             dest.parent.mkdir(parents=True, exist_ok=True)
+            logger.debug(f"Copying to: {dest}")
             copy(self.path, dest)
         except OSError as e:
             logger.error(f"Could not copy file {self.path} to {dest}: {repr(e)}")
