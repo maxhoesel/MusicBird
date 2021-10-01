@@ -53,7 +53,7 @@ class FFmpegEncoder(Encoder):
 
         # Check if we can access ffmpeg
         try:
-            subprocess.run(["ffmpeg", "-version"], capture_output=True, check=True)
+            subprocess.run(["ffmpeg", "-version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
         except FileNotFoundError as e:
             logger.fatal("Could not access ffmpeg. Pease make sure that it is installed")
             raise e

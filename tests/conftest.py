@@ -1,5 +1,6 @@
 # pylint: disable=redefined-outer-name
 
+from distutils.dir_util import copy_tree
 from pathlib import Path
 from typing import Dict, List, Tuple
 import shutil
@@ -20,7 +21,7 @@ def library_and_db(library) -> Tuple[Path, Dict[Path, Dict], LibraryDB]:
 
 @pytest.fixture
 def library(tmp_path) -> Tuple[Path, List[File]]:
-    """Creates a temporary library that contains tes files to use.
+    """Creates a temporary library that contains test files to use.
 
     The returned path has the following directory structure:
     tmp_path/
@@ -34,7 +35,8 @@ def library(tmp_path) -> Tuple[Path, List[File]]:
     """
     files_path = "tests/files"
 
-    shutil.copytree(files_path, Path(tmp_path), dirs_exist_ok=True)
+    # shutils.copytree takes Path objects, but the exist_ok flag was only added in Python 3.8
+    copy_tree(files_path, str(Path(tmp_path)))
     config = {
         "source": str(Path(tmp_path).joinpath("library")),
         "destination": str(Path(tmp_path).joinpath("dest")),

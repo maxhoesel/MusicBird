@@ -53,13 +53,18 @@ def prune(config: Dict, db: LibraryDB, pretend=False) -> bool:
         dest = file.get_dest_path(config)
         if not pretend:
             try:
-                dest.unlink(missing_ok=True)
+                dest.unlink()
+            except FileNotFoundError:
                 db.remove_file(file)
                 successes.append(file)
                 logger.info(f"Removed file: {dest}")
             except OSError as e:
                 logger.error(f"Could not remove file {dest}: {repr(e)}")
                 failures.append(file)
+            else:
+                db.remove_file(file)
+                successes.append(file)
+                logger.info(f"Removed file: {dest}")
         else:
             successes.append(file)
             db.remove_file(file)

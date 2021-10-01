@@ -117,7 +117,7 @@ class SQLiteLibrary(LibraryDB):
             self._init_db_con(pretend=True)
         elif delete and not pretend:
             try:
-                path.unlink(missing_ok=True)
+                path.unlink()
                 logger.info(f"Removed previous database at {self.path}")
             except FileNotFoundError:
                 pass
@@ -202,7 +202,8 @@ class SQLiteLibrary(LibraryDB):
                 self._con = sqlite3.connect(":memory:", check_same_thread=False)
             else:
                 self.path.parent.mkdir(parents=True, exist_ok=True)
-                self._con = sqlite3.connect(self.path, check_same_thread=False)
+                # Python <= 3.7 needs a string instead of a Path object
+                self._con = sqlite3.connect(str(self.path), check_same_thread=False)
             self._con.row_factory = sqlite3.Row
             with self._con:
                 self._con.execute(f"CREATE TABLE IF NOT EXISTS {SQLiteLibrary._FILES_TABLE} ({columns})")

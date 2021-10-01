@@ -13,7 +13,7 @@ Requirements
 To run MusicBird you need:
 
 * A machine running a recent distribution of Linux with enough CPU power to convert music files
-* Python 3.8 or later
+* Python 3.6 or later
 * :code:`pip`
 * :code:`ffmpeg` installed and ready to go
 

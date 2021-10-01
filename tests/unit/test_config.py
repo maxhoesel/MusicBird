@@ -34,7 +34,7 @@ def test_config_print_command(library: Tuple[Path, List[File]]):
     with workdir.joinpath("config.yml").open() as f:
         config: Dict = yaml.safe_load(f)
     args = ["musicbird", "-c", str(workdir.joinpath("config.yml")), "config", "print", "--format", "json"]
-    result = subprocess.run(args, check=True, capture_output=True)
+    result = subprocess.run(args, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     assert config.items() <= json.loads(result.stdout).items()
 
 
