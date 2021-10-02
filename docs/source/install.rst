@@ -15,7 +15,8 @@ To run MusicBird you need:
 * A machine running a recent distribution of Linux with enough CPU power to convert music files
 * Python 3.6 or later
 * :code:`pip`
-* :code:`ffmpeg` installed and ready to go
+* :code:`ffmpeg`
+* If you are encoding to Opus and want embedded album art support: :code:`opus-tools`
 
 .. note:: Windows and MacOS are not supported at this time
 
@@ -23,7 +24,7 @@ To install the requirements under Debian/Ubuntu:
 
 .. code::
 
-   sudo apt update && sudo apt install -y ffmpeg python3-pip
+   sudo apt update && sudo apt install -y ffmpeg python3-pip opus-tools
 
 Install
 =======
