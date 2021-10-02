@@ -8,6 +8,7 @@ from abc import ABC, abstractmethod
 import logging
 from pathlib import Path
 import subprocess
+import re
 import sys
 from typing import Dict
 
@@ -38,6 +39,20 @@ class Encoder(ABC):
             bool: True if the operation was successful, False if not.
         """
 
+    @staticmethod
+    def mkdir(dest: Path) -> bool:
+        """Create the directory for the dest file.
+
+        Returns:
+            bool: Whether the creatin was successful
+        """
+        try:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            logger.error(f"Could not create directory to encode file {dest}: {repr(e)}")
+            return False
+        return True
+
 
 class FFmpegEncoder(Encoder):
     """Base class for all encoders utilizing ffmpeg.
@@ -62,11 +77,7 @@ class FFmpegEncoder(Encoder):
             raise e
 
     def encode(self, src: Path, dest: Path) -> bool:
-        dest = dest.with_suffix(self.extension)
-        try:
-            dest.parent.mkdir(parents=True, exist_ok=True)
-        except OSError as e:
-            logger.error(f"Could not create directory to encode file {dest}: {repr(e)}")
+        if not self.mkdir(dest):
             return False
         try:
             logger.debug(f"Encoding to {str(dest)} with arguments {self.ffmpeg_args}")
@@ -92,11 +103,68 @@ class MP3Encoder(FFmpegEncoder):
 
 
 class OpusEncoder(FFmpegEncoder):
+
+    opusenc_checked = False
+    use_opusenc = False
+
     def __init__(self, config: Dict) -> None:
         super().__init__(config)
+
         self.extension = ".opus"
-        self.ffmpeg_args["acodec"] = "libopus"
-        self.ffmpeg_args["audio_bitrate"] = config["bitrate"]
+
+        if self._init_opusenc():
+            self.opus_args = [
+                "--bitrate", re.sub('\D', '', config["bitrate"]),  # Strip k postfix from bitrate
+            ]
+        else:
+            # FFmpeg fallback
+            self.ffmpeg_args["acodec"] = "libopus"
+            self.ffmpeg_args["audio_bitrate"] = config["bitrate"]
+
+    def encode(self, src: Path, dest: Path) -> bool:
+        if self.use_opusenc:
+            if not self.mkdir(dest):
+                return False
+
+            args = ["opusenc", str(src), str(dest.with_suffix(self.extension))] + self.opus_args
+            try:
+                subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+            except (subprocess.CalledProcessError, OSError) as e:
+                logger.error(f"fFailed to encode file {src}. opusenc error: \n {repr(e)}")
+                return False
+            return True
+        else:
+            return super().encode(src, dest)
+
+    def _init_opusenc(self) -> bool:
+        """Look for opusenc and set the encoder to use it if available.
+
+        FFmpegs libopus encoder does not support embedding album art as of late 2021.
+        To work around this, we use opusenc directly if it is installed. If not,
+        we issue a warning and fallback to ffmpeg.
+
+        Returns:
+            bool: Whether opusenc can be used.
+        """
+
+        # Use a classvar to only check for opusenc once every run.
+        # If it's not there the first, it's not gonna be there at all.
+        if OpusEncoder.opusenc_checked:
+            return OpusEncoder.use_opusenc
+
+        try:
+            subprocess.run(["opusenc", "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            logger.warning((
+                "opusenc does not appear to be installed. Falling back to ffmpeg encoding."
+                "Please install 'opus-tools' if you want embedded album art support in Opus files"
+            ))
+            OpusEncoder.use_opusenc = False
+        else:
+            OpusEncoder.use_opusenc = True
+        finally:
+            OpusEncoder.opusenc_checked = True
+        return OpusEncoder.use_opusenc
 
 
 def init(config, exit_on_error: bool = True) -> Encoder:
