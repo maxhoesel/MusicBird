@@ -3,8 +3,6 @@ MusicBird Documentation
 
 Welcome to the documentation for MusicBird, an advanced Python package for creating mobile-friendly copies of your music library.
 
-.. _purpose:
-
 Purpose of the Project
 ======================
 

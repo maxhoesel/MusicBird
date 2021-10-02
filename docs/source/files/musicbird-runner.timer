@@ -1,0 +1,11 @@
+[Unit]
+Description=Run encoder service
+
+[Timer]
+# Run the service every even hour.
+# See https://man.archlinux.org/man/systemd.time.7 for the OnCalendar format.
+OnCalendar=00/2:0
+Persistent=true
+
+[Install]
+WantedBy=timers.target
