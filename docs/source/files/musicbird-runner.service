@@ -1,0 +1,13 @@
+[Unit]
+Description=Run MusicBird and process changes to the Music Library
+After=networking.target
+
+[Service]
+ExecStart=/opt/musicbird/venv/bin/musicbird run
+WorkingDirectory=/opt/musicbird
+User=musicbird
+Group=musicbird
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

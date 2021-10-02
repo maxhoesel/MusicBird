@@ -61,6 +61,8 @@ That's it! MusicBird is now installed. You can check that everything worked with
    If you are getting a :code:`command not found` error when running :code:`musicbird`,
    try logging back out and in. If that doesn't work, you might have to add :file:`~/.local/bin` to your :code:`$PATH`
 
+.. _server_install:
+
 Virtualenv (Server) Install
 ---------------------------
 
