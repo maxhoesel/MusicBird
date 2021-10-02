@@ -15,8 +15,7 @@ To setup Tox:
 
 1. Install tox from your distributions package repositories (probably :code:`tox` or :code:`python3-tox`.
 2. For this repository and clone it: :code:`git clone git@github.com:yourUsername/MusicBird`
-3. Enter the repository and run :code:`tox -l`: :code:`cd MusicBird && tox -l`. Tox will now initialize itself
-   and then display all available environments. You can run :code:`tox` to run all tests/integration steps at once.
+3. Run :code:`tox -l` from inside the repository to see all available environments. Run :code:`tox` to test all environments.
 
 Now,change to a feature branch and start making your changes. Whenever you are ready to test, you can just run :code:`tox -e <environment>`
 to run the individual test steps.
@@ -47,7 +46,7 @@ Commit Messages
 
 Follow the guidelines below when committing your changes
 
-* All commits **must** follow the <conventional-commits standard https://www.conventionalcommits.org/en/v1.0.0/>_:
+* All commits **must** follow the `conventional-commits standard <https://www.conventionalcommits.org/en/v1.0.0/>`_:
   :code:`<type>(optional scope): <description>`
   * Valid scopes are all components of this project, such as modules or commands
 * Structure your changes so that they are separated into logical and independent commits whenever possible.
@@ -56,6 +55,7 @@ Follow the guidelines below when committing your changes
   allowing you to make modifications before adding them to your branch.
 
 Some good examples:
+
 * :code:`fix(prune): also delete files with unicode chars`
 * :code:`feat: Add "config edit" command`
 
@@ -77,14 +77,14 @@ You can one (or both) using :code:`tox` (:code:`tox -- tests/unit`, :code:`tox -
 
 .. note::
 
-   Tox tries to test against all python versions that MusicBird supports (3.8 and up as of October 2021).
-   Unless you happen to have
-
+   Tox tries to test against all python versions that MusicBird supports. This means that some pyxx tests might fail
+   on your machine, because you probably don't have all of them installed. You can use a tool like PyEnv to manage
+   Python installations.
 
 Writing new Tests
 -----------------
 
-Any significant in the MusicBird source should have tests associated with it. If you are adding a new feature or similar,
+Any significant code in the MusicBird source should have tests associated with it. If you are adding a new feature or similar,
 you will therefore also have to write some tets. You can take a look at the existing tests for guidance.
 
 Note that there are several fixtures available that you can use in your tests - see the :file:`tests/conftest.py` file
