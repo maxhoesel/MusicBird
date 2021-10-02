@@ -1,4 +1,15 @@
 
+<a name="v0.1.7"></a>
+## [v0.1.7] - 2021-10-02
+### Documentation
+- fiy typo in systemd docs ([59b2816](https://github.com/maxhoesel/MusicBird/commit/59b2816)) [Max Hösel]
+- improve contributing guide ([d271c76](https://github.com/maxhoesel/MusicBird/commit/d271c76)) [Max Hösel]
+- add systemd docs ([de41f03](https://github.com/maxhoesel/MusicBird/commit/de41f03)) [Max Hösel]
+
+### Features
+- add support for embedded album art in opus files ([52a445d](https://github.com/maxhoesel/MusicBird/commit/52a445d)) [Max Hösel]
+
+
 <a name="v0.1.6"></a>
 ## [v0.1.6] - 2021-10-01
 ### Bug Fixes
@@ -43,6 +54,7 @@
 - initial fixes ([1565574](https://github.com/maxhoesel/MusicBird/commit/1565574)) [Max Hösel]
 
 
+[v0.1.7]: https://github.com/maxhoesel/MusicBird/compare/v0.1.6...v0.1.7
 [v0.1.6]: https://github.com/maxhoesel/MusicBird/compare/v0.1.5...v0.1.6
 [v0.1.5]: https://github.com/maxhoesel/MusicBird/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/maxhoesel/MusicBird/compare/v0.1.3...v0.1.4
