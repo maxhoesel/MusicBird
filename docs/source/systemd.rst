@@ -70,4 +70,4 @@ Now, run the following commands to register the timer with systemd and to enable
 .. warning::
     Please make sure that you are enabling and starting the **timer**, not the **service**. Enabling the service will
     cause it to run on each boot, which is probably not what you want. If you accidentally enabled the service, you can
-    undo this by running :code:`sudo systemctl disable musicbird.service`
+    undo this by running :code:`sudo systemctl disable musicbird-runner.service`
