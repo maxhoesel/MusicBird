@@ -7,8 +7,6 @@ pick up any files relevant to musicbird, plus changes made to it.
 import logging
 from pathlib import Path
 
-import ffmpeg
-
 from .db import LibraryDB
 from .file import File
 

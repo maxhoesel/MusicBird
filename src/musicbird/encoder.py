@@ -114,7 +114,7 @@ class OpusEncoder(FFmpegEncoder):
 
         if self._init_opusenc():
             self.opus_args = [
-                "--bitrate", re.sub('\D', '', config["bitrate"]),  # Strip k postfix from bitrate
+                "--bitrate", re.sub(r'\D', '', config["bitrate"]),  # Strip k postfix from bitrate
             ]
         else:
             # FFmpeg fallback

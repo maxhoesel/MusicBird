@@ -143,3 +143,7 @@ cython_debug/
 
 # Local Pyenv File
 .python-version
+
+# Poetry files that we don't care about
+poetry.lock
+poetry.toml

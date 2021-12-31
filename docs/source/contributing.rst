@@ -3,40 +3,27 @@ Contributing to MusicBird
 
 This document should contain all the information you need to contribute to MusicBird.
 
-.. note:: By contributing to this project, you show that you have read and agree with with the `Code of Conduct. <https://github.com/maxhoesel/>`_
+.. note:: By contributing to this project, you show that you have read and agree with with the `Code of Conduct. <https://github.com/maxhoesel/MusicBird/blob/main/CODE_OF_CONDUCT.md>`_
 
 Initial Setup
 =============
 
-This project uses `Tox <https://tox.readthedocs.io/en/latest/>`_ for testing and other development workflows.
-Tox allows us to quickly setup up reproducible build and test environments, so it is used in all CI tasks and integrations.
+Make sure that you have the regular MusicBird dependencies installed (such as ffmpeg).
 
-To setup Tox:
+This project uses `poetry <https://python-poetry.org>`_ for dependency management and `tox <https://tox.wiki/en/latest>`_ for running tests/integrations.
 
-1. Install tox from your distributions package repositories (probably :code:`tox` or :code:`python3-tox`.
-2. For this repository and clone it: :code:`git clone git@github.com:yourUsername/MusicBird`
-3. Run :code:`tox -l` from inside the repository to see all available environments. Run :code:`tox` to test all environments.
+Automatic installation
+----------------------
 
-Now,change to a feature branch and start making your changes. Whenever you are ready to test, you can just run :code:`tox -e <environment>`
-to run the individual test steps.
+To install the dev dependencies and setup the environment, simply run :code:`scripts/setup.sh` from your user shell.
+Alternatively, you can follow the manual steps below.
 
-.. note:: As a general rule of thumb, always run :code:`tox` fully before committing any changes.
+Manual installation
+-----------------------
 
-.. _editable_dev_setup:
-
-Editable Setup
---------------
-
-Sometimes, debugging issues from within tox runs can be hard and tedious. In those situations, a local editable environment can help.
-This allows you to make changes to the code and directly run tests/CLI commands without having to repackage anything, nor run tox.
-
-This project provides a script for exactly this purpose. Simply run :file:`./scripts/setup.sh` to initialize a local
-development environment. This script create a new venv at :file`.venv`, then installs MusicBird, plus some other utilities.
-
-To activate this environment, run: :code:`. .venv/bin/activate`
-
-From now on, you can make changes to MusicBirds source code and immediately test them on the CLI/in Pytest,
-without having to rebuild the package with tox.
+1. Install the following python packages (preferably via pip): :code:`tox poetry`
+2. Create a virtual environment for the project (via poetry) and activate it in your IDE and shell
+3. (Optional: Install the pre-commit hook to automatically lint your commit messages :code:`poetry run pre-commit install --hook-type commit-msg`)
 
 Conventions and Best Practices
 ==============================
@@ -51,7 +38,7 @@ Follow the guidelines below when committing your changes
   * Valid scopes are all components of this project, such as modules or commands
 * Structure your changes so that they are separated into logical and independent commits whenever possible.
 * The commit message should clearly state **what** your change does. The "why" and "how" belong into the commit body.
-* Note that if you use the :ref:`editable_dev_setup`, your commit messages will be checked automatically upon committing,
+* Note that if you install the pre-commit hook, your commit messages will be checked automatically upon committing,
   allowing you to make modifications before adding them to your branch.
 
 Some good examples:
@@ -79,7 +66,7 @@ You can one (or both) using :code:`tox` (:code:`tox -- tests/unit`, :code:`tox -
 
    Tox tries to test against all python versions that MusicBird supports. This means that some pyxx tests might fail
    on your machine, because you probably don't have all of them installed. You can use a tool like PyEnv to manage
-   Python installations.
+   Python installations if you want to. Alternatively, the CI will run against all python versions when you create a pull request.
 
 Writing new Tests
 -----------------
@@ -91,7 +78,7 @@ Note that there are several fixtures available that you can use in your tests - 
 for more details on their usage.
 
 When running test with Tox, it will automatically generate a coverage report for you. You can view the results by opening
-:file:`htmlcov/intex.html` in your browser.
+:file:`htmlcov/index.html` in your browser.
 
 Documentation
 =============
