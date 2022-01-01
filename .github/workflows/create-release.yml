@@ -77,7 +77,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/musicbird-${{ github.event.inputs.version }}.tar.gz
+          asset_path: ./dist/musicbird-*.tar.gz
           asset_name: musicbird-${{ github.event.inputs.version }}.tar.gz
           asset_content_type: application/tar+gzip
 
