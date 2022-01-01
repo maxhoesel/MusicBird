@@ -25,11 +25,11 @@ jobs:
       run: |
         sudo apt update && sudo apt install -y ffmpeg opus-tools
         python3 -m pip install --upgrade pip
-        pip install tox tox-gh-actions
+        pip install tox tox-gh-actions poetry
     - name: Test with tox
       run: tox
 
-  lint:
+  gitlint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -40,21 +40,27 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip install 'gitlint>=0.15.0,<0.16.0'
-        pip install --editable '.[dev]'
-        curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s
+        pip install tox tox-gh-actions poetry
 
     - name: Run gitlint
-      env:
-        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: tox -e gitlint
+
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+    - name: Install dependencies
       run: |
-        gitlint 2>&1 | ./bin/reviewdog -efm="%m" -reporter=github-pr-check -filter-mode=nofilter -fail-on-error -name="gitlint"
+        python3 -m pip install --upgrade pip
+        pip install tox tox-gh-actions poetry
 
     - name: Run pylint
-      env:
-        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        pylint --msg-template='{path}:{line}:{column}:{msg_id} {msg}' --output-format=parseable ./src/musicbird --exit-zero | ./bin/reviewdog -efm="%f:%l:%c:%m" -reporter=github-pr-check -filter-mode=nofilter -name="gitlint"
+      run: tox -e pylint
+
 
   coverage:
     runs-on: ubuntu-latest
@@ -68,7 +74,7 @@ jobs:
       run: |
         sudo apt update && sudo apt install -y ffmpeg
         python3 -m pip install --upgrade pip
-        pip install tox tox-gh-actions
+        pip install tox tox-gh-actions poetry
     - name: Geneerate coverate report
       run: tox -e py39
 

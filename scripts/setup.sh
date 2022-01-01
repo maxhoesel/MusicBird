@@ -2,13 +2,15 @@
 set -eu
 set -e pipefail
 
-python3 -m venv .venv
-# shellcheck disable=SC1091
-source .venv/bin/activate
-python3 -m pip install 'gitlint>=0.15.0,<0.16.0' 'autopep8'
-python3 -m pip install --editable '.[dev]'
+pip install tox poetry
 
-gitlint install-hook
+# Enable a local venv for this project so that IDEs can pick it up easily (VSCode)
+poetry config virtualenvs.in-project true --local
 
-# Initialize tox venvs
-tox -l > /dev/null
+# Create the local venv and install it
+poetry install
+
+# Activate the pre-commit hook in the venv
+poetry run pre-commit install --hook-type commit-msg
+
+poetry shell
