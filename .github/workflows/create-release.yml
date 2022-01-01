@@ -70,9 +70,9 @@ jobs:
           draft: false
           prerelease: false
 
-        # Poetrys namine for prerelease assets is not always the same as the version tag (pre1 -> rc1)
+      # Poetrys namine for prerelease assets is not always the same as the version tag (pre1 -> rc1)
       - name: Rename Release Asset to predictable name
-        run: mv ./dist/musicbird*.tar.gz ./dist/musicbird.tar.gz
+        run: mv ./dist/MusicBird*.tar.gz ./dist/musicbird.tar.gz
 
       - name: Upload Release Asset
         id: upload-release-asset
