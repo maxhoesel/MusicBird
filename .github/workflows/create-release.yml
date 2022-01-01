@@ -29,7 +29,7 @@ jobs:
           wget https://github.com/git-chglog/git-chglog/releases/download/v0.15.0/git-chglog_0.15.0_linux_amd64.tar.gz -O ./tmp-chglog/git-chglog.tar.gz
           tar xf ./tmp-chglog/git-chglog.tar.gz --directory ./tmp-chglog
           python -m pip install --upgrade pip
-          pip install --upgrade build
+          pip install --upgrade poetry
 
       - name: Get last release version
         run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
@@ -40,9 +40,8 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "noreply@github.com"
 
-      - name: Set MusicBird package version
-        run: |
-          sed -i '/__version__ = */c\__version__ = "${{ github.event.inputs.version }}"' src/musicbird/__init__.py
+      - name: Set MusicBird version
+        run: poetry version "${{ github.event.inputs.version }}"
 
       - name: Generate full changelog and remove git-chglog files
         run: |
@@ -50,11 +49,11 @@ jobs:
           rm -rf tmp-chglog
 
       - name: Build project
-        run: python3 -m build --sdist --wheel --outdir ./dist
+        run: poetry build
 
       - name: Create and push Release commit
         run: |
-          git add CHANGELOG.md src/musicbird/__init__.py
+          git add CHANGELOG.md pyproject.toml
           git commit -m "Release ${{ github.event.inputs.version }}"
           git push
       - name: Get release commit hash
@@ -85,4 +84,4 @@ jobs:
       - name: Publish package on PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          password: ${{ secrets.PYPI_TEST_API_TOKEN }}
