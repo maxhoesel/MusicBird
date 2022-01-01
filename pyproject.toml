@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "MusicBird"
-version = "0.1.8-pre5"
+version = "0.1.8-pre6"
 description = "Convert your music library on-the-fly!"
 license = "GPL-3.0-or-later"
 keywords = ["musicbird", "media", "conversion", "ffmpeg"]
