@@ -1,4 +1,13 @@
 
+<a name="v0.1.8-pre1"></a>
+## [v0.1.8-pre1] - 2022-01-01
+### Bug Fixes
+- add missing dependency for python <3.8 ([8e3adeb](https://github.com/maxhoesel/MusicBird/commit/8e3adeb)) [Max Hösel]
+
+### Documentation
+- move rtd to poetry ([bb67acf](https://github.com/maxhoesel/MusicBird/commit/bb67acf)) [Max Hösel]
+
+
 <a name="v0.1.7"></a>
 ## [v0.1.7] - 2021-10-02
 ### Documentation
@@ -54,6 +63,7 @@
 - initial fixes ([1565574](https://github.com/maxhoesel/MusicBird/commit/1565574)) [Max Hösel]
 
 
+[v0.1.8-pre1]: https://github.com/maxhoesel/MusicBird/compare/v0.1.7...v0.1.8-pre1
 [v0.1.7]: https://github.com/maxhoesel/MusicBird/compare/v0.1.6...v0.1.7
 [v0.1.6]: https://github.com/maxhoesel/MusicBird/compare/v0.1.5...v0.1.6
 [v0.1.5]: https://github.com/maxhoesel/MusicBird/compare/v0.1.4...v0.1.5
