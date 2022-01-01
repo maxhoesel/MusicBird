@@ -1,4 +1,7 @@
 
+<a name="v0.1.8-pre8"></a>
+## [v0.1.8-pre8] - 2022-01-01
+
 <a name="v0.1.8-pre7"></a>
 ## [v0.1.8-pre7] - 2022-01-01
 
@@ -81,6 +84,7 @@
 - initial fixes ([1565574](https://github.com/maxhoesel/MusicBird/commit/1565574)) [Max Hösel]
 
 
+[v0.1.8-pre8]: https://github.com/maxhoesel/MusicBird/compare/v0.1.8-pre7...v0.1.8-pre8
 [v0.1.8-pre7]: https://github.com/maxhoesel/MusicBird/compare/v0.1.8-pre6...v0.1.8-pre7
 [v0.1.8-pre6]: https://github.com/maxhoesel/MusicBird/compare/v0.1.8-pre5...v0.1.8-pre6
 [v0.1.8-pre5]: https://github.com/maxhoesel/MusicBird/compare/v0.1.8-pre4...v0.1.8-pre5

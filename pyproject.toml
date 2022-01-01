@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "MusicBird"
-version = "0.1.8-pre7"
+version = "0.1.8-pre8"
 description = "Convert your music library on-the-fly!"
 readme = "README.rst"
 license = "GPL-3.0-or-later"
