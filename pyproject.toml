@@ -19,6 +19,7 @@ python = ">=3.6.2,<3.10"
 schema = "^0.7.5"
 ffmpeg-python = "^0.2.0"
 PyYAML = "^6.0"
+importlib-metadata = { version = "^1.0", python = "<3.8" }
 
 [tool.poetry.dev-dependencies]
 gitlint = "^0.17.0"
