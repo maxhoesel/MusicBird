@@ -2,6 +2,7 @@
 name = "MusicBird"
 version = "0.1.8-pre6"
 description = "Convert your music library on-the-fly!"
+readme = "README.rst"
 license = "GPL-3.0-or-later"
 keywords = ["musicbird", "media", "conversion", "ffmpeg"]
 classifiers = [
@@ -13,6 +14,7 @@ repository = "https://github.com/maxhoesel/musicbird"
 packages = [
     { include = "musicbird", from = "src"},
 ]
+
 
 [tool.poetry.dependencies]
 python = ">=3.6.2,<3.10"
